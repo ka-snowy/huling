@@ -18,6 +18,7 @@
             rows="10"
             @focus="textarea.left.isFocus = true"
             @blur="textarea.left.isFocus = false"
+            leftta
           ></textarea>
         </div>
         <div>
@@ -29,11 +30,12 @@
             rows="10"
             @focus="textarea.right.isFocus = true"
             @blur="textarea.right.isFocus = false"
+            rightta
           ></textarea>
         </div>
       </div>
       <details class="details custom-block">
-        <summary>対応表</summary>
+        <summary>優先順</summary>
         <table>
           <thead>
             <tr>
@@ -46,10 +48,10 @@
             <tr v-for="(column, index) in list.set" :key="index">
               <td style="text-align: center">{{ index + 1 }}</td>
               <td style="text-align: center">
-                <code>{{ column[0] }}</code>
+                <code leftta>{{ column[0] }}</code>
               </td>
               <td style="text-align: center">
-                <code>{{ column[1] }}</code>
+                <code rightta>{{ column[1] }}</code>
               </td>
             </tr>
           </tbody>
@@ -70,9 +72,13 @@ export default {
       type: String,
       default: null,
     },
-    csv: {
+    fontLeft: {
       type: String,
-      default: '',
+      default: 'Source Code Pro',
+    },
+    fontRight: {
+      type: String,
+      default: 'Source Code Pro',
     },
   },
 
@@ -158,6 +164,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+// Source Code Pro
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap');
 
 .HLConverter {
@@ -184,7 +191,6 @@ export default {
         min-height: 200px;
         padding: 15px;
         font-size: 1em;
-        font-family: 'Source Code Pro', monospace;
         line-height: 1.6;
         background-color: var(--vp-c-bg-alt);
         border: 1px solid transparent;
@@ -192,6 +198,14 @@ export default {
         border-color: var(--vp-custom-block-details-border);
       }
     }
+  }
+
+  [leftta] {
+    font-family: v-bind(fontLeft), 'Source Code Pro', monospace;
+  }
+
+  [rightta] {
+    font-family: v-bind(fontRight), 'Source Code Pro', monospace;
   }
 }
 </style>
